@@ -127,8 +127,10 @@ export default function App() {
             <span className="certification-symbol" aria-hidden="true">J</span>
             <div>
               <p className="eyebrow">School-issued certification</p>
-              <h3>Java Fundamentals</h3>
-              <p className="certification-date">Issued <time dateTime="2024-09-05">September 5, 2024</time></p>
+              <h3>Java Fundamentals SY2324-2T</h3>
+              <p className="certification-issuer">STI College San Jose Del Monte</p>
+              <p className="certification-course">Computer Programming 2 · SY2324-2T</p>
+              <p className="certification-date">Awarded <time dateTime="2024-09-05">September 5, 2024</time></p>
             </div>
           </article>
         </section>

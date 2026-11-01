@@ -117,3 +117,6 @@
 }
 
 .certification-date { margin: 12px 0 0; color: var(--muted); font-size: 14px; }
+
+.certification-issuer { margin: 14px 0 0; font-size: 15px; }
+.certification-course { margin: 4px 0 0; font-size: 14px; color: var(--muted); }
