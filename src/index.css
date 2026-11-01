@@ -120,3 +120,15 @@
 
 .certification-issuer { margin: 14px 0 0; font-size: 15px; }
 .certification-course { margin: 4px 0 0; font-size: 14px; color: var(--muted); }
+
+.contact-email-help { font-size: 12px; color: #435332; margin: 26px 0 12px; }
+.contact-email-option { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; max-width: 100%; }
+.contact-links { align-items: center; }
+.contact-links .email-link { margin-top: 0; }
+.contact-email-option .email-link { min-width: 0; }
+.contact-email-option .copy-email { padding: 5px 10px; font-size: 11px; }
+.contact-copy-status { max-width: none; overflow-wrap: anywhere; margin: 14px 0 0; }
+@media (max-width: 360px) {
+  .hero h1 { font-size: 64px; }
+  .hero > * { min-width: 0; }
+}
