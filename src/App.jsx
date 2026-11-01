@@ -10,7 +10,10 @@ function Arrow() {
 }
 
 const CONTACT_EMAIL = 'cataniagmarcoliver@gmail.com';
-const GMAIL_COMPOSE = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(CONTACT_EMAIL)}&su=${encodeURIComponent('Let’s work together')}`;
+const CONTACT_EMAILS = [CONTACT_EMAIL, 'cataniag.258053@sjdelmonte.sti.edu.ph'];
+function gmailComposeUrl(email) {
+  return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent('Let’s work together')}`;
+}
 const BENCHMARK_IMAGES = [
   { src: benchmark, label: 'Fire Strike', alt: '3DMark Fire Strike benchmark result and comparison chart' },
   { src: benchmarkDetail, label: 'GPU reference', alt: 'GeForce RTX 4060 Laptop GPU specifications and average benchmark score' },
@@ -23,12 +26,12 @@ export default function App() {
   const [copyStatus, setCopyStatus] = useState('');
   const currentBenchmark = BENCHMARK_IMAGES[benchmarkIndex];
 
-  async function copyEmail() {
+  async function copyEmail(email) {
     try {
-      await navigator.clipboard.writeText(CONTACT_EMAIL);
-      setCopyStatus('Email address copied.');
+      await navigator.clipboard.writeText(email);
+      setCopyStatus(`Copied ${email}.`);
     } catch {
-      setCopyStatus('Could not copy automatically. Select the email address below to copy it.');
+      setCopyStatus(`Could not copy automatically. Select ${email} below to copy it.`);
     }
   }
   return (
@@ -134,7 +137,31 @@ export default function App() {
             </div>
           </article>
         </section>
-        <section id="contact" className="contact-section"><div className="wrap"><p className="eyebrow">05 / Let’s connect</p><h2>Good things start<br />with a <em>hello.</em></h2><div className="contact-bottom"><p>Have a project, an opportunity, or an idea?<br />I’d love to hear about it.</p><div className="contact-actions"><a className="button dark" href={GMAIL_COMPOSE} target="_blank" rel="noreferrer">Say hello <Arrow /></a><span className="contact-action-hint">Opens Gmail in a new tab</span><button className="copy-email" type="button" onClick={copyEmail}>Copy email address</button><span className="copy-status" role="status">{copyStatus}</span></div></div><div className="contact-links"><a className="email-link" href="mailto:cataniagmarcoliver@gmail.com">cataniagmarcoliver@gmail.com</a><a className="email-link" href="mailto:cataniag.258053@sjdelmonte.sti.edu.ph">cataniag.258053@sjdelmonte.sti.edu.ph</a><a className="email-link" href="https://github.com/XMC03" target="_blank" rel="noreferrer">GitHub / XMC03 <Arrow /></a></div></div></section>
+        <section id="contact" className="contact-section">
+          <div className="wrap">
+            <p className="eyebrow">05 / Let’s connect</p>
+            <h2>Good things start<br />with a <em>hello.</em></h2>
+            <div className="contact-bottom">
+              <p>Have a project, an opportunity, or an idea?<br />I’d love to hear about it.</p>
+              <div className="contact-actions">
+                <a className="button dark" href={gmailComposeUrl(CONTACT_EMAIL)} target="_blank" rel="noreferrer">Say hello <Arrow /></a>
+                <span className="contact-action-hint">Opens Gmail in a new tab</span>
+                <button className="copy-email" type="button" onClick={() => copyEmail(CONTACT_EMAIL)}>Copy email address</button>
+              </div>
+            </div>
+            <p className="contact-email-help">Choose an address to compose in Gmail, or copy it to use another email app.</p>
+            <div className="contact-links">
+              {CONTACT_EMAILS.map(email => (
+                <div className="contact-email-option" key={email}>
+                  <a className="email-link" href={gmailComposeUrl(email)} target="_blank" rel="noreferrer" aria-label={`Email ${email} in Gmail (new tab)`}>{email} <Arrow /></a>
+                  <button className="copy-email" type="button" onClick={() => copyEmail(email)} aria-label={`Copy ${email}`}>Copy</button>
+                </div>
+              ))}
+              <a className="email-link" href="https://github.com/XMC03" target="_blank" rel="noreferrer">GitHub / XMC03 <Arrow /></a>
+            </div>
+            <p className="copy-status contact-copy-status" role="status">{copyStatus}</p>
+          </div>
+        </section>
       </main>
       <footer className="wrap"><a className="wordmark" href="#home" aria-label="Back to home">mo<span>.</span></a><p>© {new Date().getFullYear()} Marc Oliver Cataniag</p><a href="#home">Back to top ↑</a></footer>
     </>
