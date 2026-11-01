@@ -14,3 +14,52 @@
 .project-features{list-style:none;padding:0;margin:0 0 24px}.project-features li{padding:11px 0;border-top:1px solid #c7cdbf}.project-features strong{display:block;font-size:13px;font-weight:500;margin-bottom:4px}.project-features li>span{display:block;font-size:12px;color:var(--muted);line-height:1.6}.project-link{display:inline-flex;align-items:center;gap:26px;font-size:14px;margin-top:25px;border-bottom:1px solid;padding-bottom:8px}.project-link:hover{color:#53722c}
 @media(max-width:900px){.featured-project{gap:28px}.goodmark-visual{min-height:460px}}
 @media(max-width:640px){.featured-project{grid-template-columns:1fr;gap:28px;padding-bottom:35px;margin-bottom:35px}.goodmark-visual{min-height:320px;padding:25px}.featured-project-copy h3{font-size:38px}}
+
+/* Project screenshots stay readable, with the originals available at full size. */
+.project-visual {
+  position: relative;
+  padding: 16px 16px 44px;
+}
+.project-visual img {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.portfolio-visual { background: #d4d9cb; }
+.benchmark-visual { flex-direction: row; }
+.benchmark-visual img { max-height: 100%; }
+.preview-hint {
+  position: absolute;
+  bottom: 14px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+}
+.benchmark-options { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.benchmark-options button, .copy-email {
+  padding: 8px 13px;
+  border: 1px solid #a9b39a;
+  border-radius: 20px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 12px;
+  cursor: pointer;
+}
+.benchmark-options button[aria-pressed="true"] {
+  background: var(--ink);
+  color: white;
+  border-color: var(--ink);
+}
+.contact-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.contact-action-hint { font-size: 11px; color: #435332; }
+.copy-email:hover { background: #c4dc95; }
+.copy-status { max-width: 260px; font-size: 12px; line-height: 1.5; }
+.copy-status:empty { display: none; }
+@media (max-width: 640px) {
+  .contact-actions { margin-top: 22px; }
+  .contact-bottom .contact-actions .button { margin-top: 0; }
+  .project-visual { height: 280px; }
+}
