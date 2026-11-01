@@ -1,12 +1,19 @@
 import { useState } from 'react';
 import profile from './assets/profile.jpg';
-import portfolio from './assets/project1.png';
+import portfolio from './assets/portfolio-preview.png';
 import benchmark from './assets/project2.png';
 import benchmarkDetail from './assets/project3.png';
 
 function Arrow() {
   return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" /></svg>;
 }
+
+const CONTACT_EMAIL = 'cataniagmarcoliver@gmail.com';
+const GMAIL_COMPOSE = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(CONTACT_EMAIL)}&su=${encodeURIComponent('Let’s work together')}`;
+const BENCHMARK_IMAGES = [
+  { src: benchmark, label: 'Fire Strike', alt: '3DMark Fire Strike benchmark result and comparison chart' },
+  { src: benchmarkDetail, label: 'GPU reference', alt: 'GeForce RTX 4060 Laptop GPU specifications and average benchmark score' },
+];
 
 const skills = [
   { number: '01', title: 'Web development', text: 'Building personal websites with HTML, CSS, and React.', tags: ['HTML', 'CSS', 'React'] },
@@ -16,6 +23,18 @@ const skills = [
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [benchmarkIndex, setBenchmarkIndex] = useState(0);
+  const [copyStatus, setCopyStatus] = useState('');
+  const currentBenchmark = BENCHMARK_IMAGES[benchmarkIndex];
+
+  async function copyEmail() {
+    try {
+      await navigator.clipboard.writeText(CONTACT_EMAIL);
+      setCopyStatus('Email address copied.');
+    } catch {
+      setCopyStatus('Could not copy automatically. Select the email address below to copy it.');
+    }
+  }
   return (
     <>
       <a className="skip-link" href="#main">Skip to content</a>
@@ -25,7 +44,7 @@ export default function App() {
         <nav id="navigation" className={menuOpen ? 'is-open' : ''} aria-label="Main navigation">
           {['work', 'about', 'skills', 'contact'].map(section => <a key={section} href={`#${section}`} onClick={() => setMenuOpen(false)}>{section}</a>)}
         </nav>
-        <a className="header-contact" href="mailto:cataniag.258053@sjdelmonte.sti.edu.ph">Let’s talk <Arrow /></a>
+        <a className="header-contact" href="#contact">Let’s talk <Arrow /></a>
       </header>
       <main id="main">
         <section className="hero wrap" id="home">
@@ -73,8 +92,29 @@ export default function App() {
               </div>
             </article>
             <div className="projects-grid">
-              <article className="project-card"><div className="project-visual portfolio-visual"><img src={portfolio} alt="Screenshot of my original HTML and CSS portfolio" loading="lazy" /></div><div className="project-heading"><h3>Personal portfolio</h3><span>01</span></div><p>A personal space on the web, built from the ground up with HTML and CSS.</p><div className="tags"><span>HTML</span><span>CSS</span><span>Web design</span></div></article>
-              <article className="project-card"><div className="project-visual benchmark-visual"><img src={benchmark} alt="CPU and GPU benchmark tool results" loading="lazy" /><img className="benchmark-detail" src={benchmarkDetail} alt="Additional system benchmark results" loading="lazy" /></div><div className="project-heading"><h3>System benchmark tool</h3><span>02</span></div><p>Exploring CPU and GPU performance through testing and system benchmarks.</p><div className="tags"><span>Performance</span><span>Hardware</span><span>Testing</span></div></article>
+              <article className="project-card">
+                <a className="project-visual portfolio-visual" href={portfolio} target="_blank" rel="noreferrer" aria-label="Open personal portfolio screenshot at full size (new tab)">
+                  <img src={portfolio} alt="Screenshot of this portfolio’s redesigned homepage" loading="lazy" />
+                  <span className="preview-hint">View full screenshot <Arrow /></span>
+                </a>
+                <div className="project-heading"><h3>Personal portfolio</h3><span>01</span></div>
+                <p>A responsive personal portfolio built with React, with a focus on clear design and accessible navigation.</p>
+                <div className="tags"><span>React</span><span>CSS</span><span>Web design</span></div>
+              </article>
+              <article className="project-card">
+                <a className="project-visual benchmark-visual" href={currentBenchmark.src} target="_blank" rel="noreferrer" aria-label={`Open ${currentBenchmark.label} screenshot at full size (new tab)`}>
+                  <img src={currentBenchmark.src} alt={currentBenchmark.alt} loading="lazy" />
+                  <span className="preview-hint">View full screenshot <Arrow /></span>
+                </a>
+                <div className="benchmark-options" role="group" aria-label="Choose a benchmark screenshot">
+                  {BENCHMARK_IMAGES.map((image, index) => (
+                    <button key={image.label} type="button" aria-pressed={benchmarkIndex === index} onClick={() => setBenchmarkIndex(index)}>{image.label}</button>
+                  ))}
+                </div>
+                <div className="project-heading"><h3>System benchmarking</h3><span>02</span></div>
+                <p>Exploring CPU and GPU performance through benchmark results and hardware reference comparisons.</p>
+                <div className="tags"><span>Performance</span><span>Hardware</span><span>Testing</span></div>
+              </article>
             </div>
           </div>
         </section>
@@ -83,7 +123,7 @@ export default function App() {
           <div className="about-grid"><h2>A curious mind.<br />A hands-on<br /><em>approach.</em></h2><div className="about-copy"><p className="large-copy">I like understanding how things work—and finding ways to make them work better.</p><p>I’m Marc Oliver Cataniag, a programmer with a focus on software and hardware. I enjoy building systems, exploring technologies, and working through complex problems.</p><p>Whether I’m experimenting with hardware or refining a piece of code, I’m driven by the same thing: learning something new and putting it into practice.</p><div className="about-facts"><div><span>ROLE</span><strong>Programmer</strong></div><div><span>FOCUS</span><strong>Software & hardware</strong></div></div></div></div>
         </section>
         <section id="skills" className="skills-section wrap"><div className="section-heading"><div><p className="eyebrow">03 / What I bring</p><h2>My growing<br /><em>toolkit.</em></h2></div><p>Practical skills, a problem-solving mindset,<br />and a willingness to keep learning.</p></div><div className="skills-grid">{skills.map(skill => <article className="skill" key={skill.number}><span className="skill-number">/{skill.number}</span><h3>{skill.title}</h3><p>{skill.text}</p><div className="tags">{skill.tags.map(tag => <span key={tag}>{tag}</span>)}</div></article>)}</div></section>
-        <section id="contact" className="contact-section"><div className="wrap"><p className="eyebrow">04 / Let’s connect</p><h2>Good things start<br />with a <em>hello.</em></h2><div className="contact-bottom"><p>Have a project, an opportunity, or an idea?<br />I’d love to hear about it.</p><a className="button dark" href="mailto:cataniag.258053@sjdelmonte.sti.edu.ph">Say hello <Arrow /></a></div><div className="contact-links"><a className="email-link" href="mailto:cataniagmarcoliver@gmail.com">cataniagmarcoliver@gmail.com</a><a className="email-link" href="mailto:cataniag.258053@sjdelmonte.sti.edu.ph">cataniag.258053@sjdelmonte.sti.edu.ph</a><a className="email-link" href="https://github.com/XMC03" target="_blank" rel="noreferrer">GitHub / XMC03 <Arrow /></a></div></div></section>
+        <section id="contact" className="contact-section"><div className="wrap"><p className="eyebrow">04 / Let’s connect</p><h2>Good things start<br />with a <em>hello.</em></h2><div className="contact-bottom"><p>Have a project, an opportunity, or an idea?<br />I’d love to hear about it.</p><div className="contact-actions"><a className="button dark" href={GMAIL_COMPOSE} target="_blank" rel="noreferrer">Say hello <Arrow /></a><span className="contact-action-hint">Opens Gmail in a new tab</span><button className="copy-email" type="button" onClick={copyEmail}>Copy email address</button><span className="copy-status" role="status">{copyStatus}</span></div></div><div className="contact-links"><a className="email-link" href="mailto:cataniagmarcoliver@gmail.com">cataniagmarcoliver@gmail.com</a><a className="email-link" href="mailto:cataniag.258053@sjdelmonte.sti.edu.ph">cataniag.258053@sjdelmonte.sti.edu.ph</a><a className="email-link" href="https://github.com/XMC03" target="_blank" rel="noreferrer">GitHub / XMC03 <Arrow /></a></div></div></section>
       </main>
       <footer className="wrap"><a className="wordmark" href="#home" aria-label="Back to home">mo<span>.</span></a><p>© {new Date().getFullYear()} Marc Oliver Cataniag</p><a href="#home">Back to top ↑</a></footer>
     </>
