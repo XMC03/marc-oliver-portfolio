@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Skills from './components/Skills';
 import profile from './assets/profile.jpg';
 import portfolio from './assets/portfolio-preview.png';
 import benchmark from './assets/project2.png';
@@ -15,11 +16,6 @@ const BENCHMARK_IMAGES = [
   { src: benchmarkDetail, label: 'GPU reference', alt: 'GeForce RTX 4060 Laptop GPU specifications and average benchmark score' },
 ];
 
-const skills = [
-  { number: '01', title: 'Web development', text: 'Building personal websites with HTML, CSS, and React.', tags: ['HTML', 'CSS', 'React'] },
-  { number: '02', title: 'Programming', text: 'Turning problems into clear logic and practical applications.', tags: ['Problem solving', 'Application development'] },
-  { number: '03', title: 'Hardware & systems', text: 'Exploring computer hardware, performance, and the details behind it.', tags: ['Hardware', 'Benchmarking', 'Debugging'] },
-];
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -122,8 +118,17 @@ export default function App() {
           <p className="eyebrow">02 / Behind the code</p>
           <div className="about-grid"><h2>A curious mind.<br />A hands-on<br /><em>approach.</em></h2><div className="about-copy"><p className="large-copy">I like understanding how things work—and finding ways to make them work better.</p><p>I’m Marc Oliver Cataniag, a programmer with a focus on software and hardware. I enjoy building systems, exploring technologies, and working through complex problems.</p><p>Whether I’m experimenting with hardware or refining a piece of code, I’m driven by the same thing: learning something new and putting it into practice.</p><div className="about-facts"><div><span>ROLE</span><strong>Programmer</strong></div><div><span>FOCUS</span><strong>Software & hardware</strong></div></div></div></div>
         </section>
-        <section id="skills" className="skills-section wrap"><div className="section-heading"><div><p className="eyebrow">03 / What I bring</p><h2>My growing<br /><em>toolkit.</em></h2></div><p>Practical skills, a problem-solving mindset,<br />and a willingness to keep learning.</p></div><div className="skills-grid">{skills.map(skill => <article className="skill" key={skill.number}><span className="skill-number">/{skill.number}</span><h3>{skill.title}</h3><p>{skill.text}</p><div className="tags">{skill.tags.map(tag => <span key={tag}>{tag}</span>)}</div></article>)}</div></section>
-        <section id="contact" className="contact-section"><div className="wrap"><p className="eyebrow">04 / Let’s connect</p><h2>Good things start<br />with a <em>hello.</em></h2><div className="contact-bottom"><p>Have a project, an opportunity, or an idea?<br />I’d love to hear about it.</p><div className="contact-actions"><a className="button dark" href={GMAIL_COMPOSE} target="_blank" rel="noreferrer">Say hello <Arrow /></a><span className="contact-action-hint">Opens Gmail in a new tab</span><button className="copy-email" type="button" onClick={copyEmail}>Copy email address</button><span className="copy-status" role="status">{copyStatus}</span></div></div><div className="contact-links"><a className="email-link" href="mailto:cataniagmarcoliver@gmail.com">cataniagmarcoliver@gmail.com</a><a className="email-link" href="mailto:cataniag.258053@sjdelmonte.sti.edu.ph">cataniag.258053@sjdelmonte.sti.edu.ph</a><a className="email-link" href="https://github.com/XMC03" target="_blank" rel="noreferrer">GitHub / XMC03 <Arrow /></a></div></div></section>
+        <Skills />
+        <section id="certifications" className="certifications-section wrap" aria-labelledby="certifications-heading">
+          <div className="section-heading">
+            <div><p className="eyebrow">04 / Continued learning</p><h2 id="certifications-heading">Certifications.</h2></div>
+          </div>
+          <article className="certification-card">
+            <span className="certification-symbol" aria-hidden="true">J</span>
+            <div><p className="eyebrow">Programming certification</p><h3>Java Fundamentals</h3></div>
+          </article>
+        </section>
+        <section id="contact" className="contact-section"><div className="wrap"><p className="eyebrow">05 / Let’s connect</p><h2>Good things start<br />with a <em>hello.</em></h2><div className="contact-bottom"><p>Have a project, an opportunity, or an idea?<br />I’d love to hear about it.</p><div className="contact-actions"><a className="button dark" href={GMAIL_COMPOSE} target="_blank" rel="noreferrer">Say hello <Arrow /></a><span className="contact-action-hint">Opens Gmail in a new tab</span><button className="copy-email" type="button" onClick={copyEmail}>Copy email address</button><span className="copy-status" role="status">{copyStatus}</span></div></div><div className="contact-links"><a className="email-link" href="mailto:cataniagmarcoliver@gmail.com">cataniagmarcoliver@gmail.com</a><a className="email-link" href="mailto:cataniag.258053@sjdelmonte.sti.edu.ph">cataniag.258053@sjdelmonte.sti.edu.ph</a><a className="email-link" href="https://github.com/XMC03" target="_blank" rel="noreferrer">GitHub / XMC03 <Arrow /></a></div></div></section>
       </main>
       <footer className="wrap"><a className="wordmark" href="#home" aria-label="Back to home">mo<span>.</span></a><p>© {new Date().getFullYear()} Marc Oliver Cataniag</p><a href="#home">Back to top ↑</a></footer>
     </>

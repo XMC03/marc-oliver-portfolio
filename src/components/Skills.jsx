@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react';
-
-// ── Exact skill data from your script.js ──
+// Original portfolio skill descriptions and detailed lists.
 import htmlImg      from '../assets/html.png';
 import programmingImg from '../assets/programming.png';
 import hardwareImg  from '../assets/hardware.png';
@@ -62,82 +60,30 @@ const SKILL_DATA = {
   },
 };
 
-// ── Modal component ──
-function SkillModal({ skill, onClose }) {
-  // Lock scroll + Escape key — same behaviour as your original closeSkillModal()
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    const onKey = e => { if (e.key === 'Escape') onClose(); };
-    window.addEventListener('keydown', onKey);
-    return () => {
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', onKey);
-    };
-  }, [onClose]);
-
-  return (
-    // clicking the overlay backdrop closes the modal
-    <div
-      className="skill-modal-overlay active"
-      id="skillModalOverlay"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modalTitle"
-      onClick={e => { if (e.target === e.currentTarget) onClose(); }}
-    >
-      <div className="skill-modal">
-        <button className="skill-modal-close" onClick={onClose} aria-label="Close">
-          &times;
-        </button>
-        <div className="skill-modal-header">
-          <img className="skill-modal-img" id="modalImg" src={skill.img} alt={skill.title} />
-          <div>
-            <h3 className="skill-modal-title" id="modalTitle">{skill.title}</h3>
-            <p className="skill-modal-rating" id="modalRating">{skill.rating}</p>
-          </div>
-        </div>
-        <p className="skill-modal-desc" id="modalDesc">{skill.desc}</p>
-        <p className="skill-modal-list-label">What I can do:</p>
-        <ul className="skill-modal-list" id="modalList">
-          {skill.items.map(item => <li key={item}>{item}</li>)}
-        </ul>
-      </div>
-    </div>
-  );
-}
-
-// ── Skills section ──
 export default function Skills() {
-  const [activeSkill, setActiveSkill] = useState(null);
-
   return (
-    <section id="skills" className="container">
-      <h2>Skills</h2>
-      <div className="skills-container">
-
-        {Object.entries(SKILL_DATA).map(([key, skill]) => (
-          <div
-            key={key}
-            className="skill-card"
-            onClick={() => setActiveSkill(skill)}
-            role="button"
-            tabIndex={0}
-            aria-label={`View ${skill.title} skills`}
-            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') setActiveSkill(skill); }}
-          >
-            <img src={skill.img} alt={skill.title} />
-            <h3>{skill.title}</h3>
-            <p className="stars">{skill.rating}</p>
-            <span className="skill-card-hint">Click to view</span>
-          </div>
-        ))}
-
+    <section id="skills" className="skills-section wrap" aria-labelledby="skills-heading">
+      <div className="section-heading">
+        <div><p className="eyebrow">03 / What I bring</p><h2 id="skills-heading">My growing<br /><em>toolkit.</em></h2></div>
+        <p>Practical skills, a problem-solving mindset,<br />and a willingness to keep learning.</p>
       </div>
-
-      {/* Render modal only when a skill is selected */}
-      {activeSkill && (
-        <SkillModal skill={activeSkill} onClose={() => setActiveSkill(null)} />
-      )}
+      <div className="restored-skills-grid">
+        {Object.entries(SKILL_DATA).map(([key, skill]) => (
+          <article className="restored-skill" key={key} aria-labelledby={`skill-${key}`}>
+            <div className="restored-skill-header">
+              <img src={skill.img} alt="" loading="lazy" />
+              <div>
+                <h3 id={`skill-${key}`}>{skill.title}</h3>
+                <p className="skill-rating" aria-label="Self-assessed proficiency: 4 out of 5">{skill.rating}</p>
+              </div>
+            </div>
+            <p className="restored-skill-description">{skill.desc}</p>
+            <ul className="restored-skill-list">
+              {skill.items.map(item => <li key={item}>{item}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
     </section>
   );
 }

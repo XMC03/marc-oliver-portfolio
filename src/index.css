@@ -63,3 +63,55 @@
   .contact-bottom .contact-actions .button { margin-top: 0; }
   .project-visual { height: 280px; }
 }
+
+/* Original skill lists, presented in the current portfolio style. */
+.restored-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+.restored-skill {
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.restored-skill-header { display: flex; align-items: center; gap: 18px; }
+.restored-skill-header img { width: 52px; height: 52px; object-fit: contain; border-radius: 8px; }
+.restored-skill h3 { margin: 0; font-size: 24px; font-weight: 500; letter-spacing: -.5px; }
+.skill-rating { margin: 6px 0 0; color: #587235; font-size: 15px; letter-spacing: 2px; }
+.restored-skill-description { margin: 24px 0 20px; color: var(--muted); font-size: 14px; }
+.restored-skill-list { display: grid; gap: 10px; padding-left: 18px; margin: 0; font-size: 14px; line-height: 1.5; }
+.restored-skill-list li::marker { color: #71864d; }
+.certifications-section { padding-bottom: 100px; }
+.certification-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 32px;
+  background: #eaece3;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.certification-symbol {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  background: #d5dfc5;
+  border-radius: 50%;
+  font-family: Georgia, serif;
+  font-size: 32px;
+  color: #435332;
+}
+.certification-card .eyebrow { margin: 0 0 10px; }
+.certification-card h3 { margin: 0; font-size: 28px; font-weight: 500; letter-spacing: -.5px; }
+@media (max-width: 640px) {
+  .restored-skills-grid { grid-template-columns: 1fr; gap: 18px; }
+  .restored-skill { padding: 24px; }
+  .certifications-section { padding-bottom: 65px; }
+  .certification-card { padding: 24px; gap: 16px; }
+  .certification-card .eyebrow { font-size: 9px; letter-spacing: 1px; }
+  .certification-card h3 { font-size: 23px; }
+  .certification-symbol { width: 50px; height: 50px; }
+}
