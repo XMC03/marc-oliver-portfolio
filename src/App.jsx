@@ -125,7 +125,11 @@ export default function App() {
           </div>
           <article className="certification-card">
             <span className="certification-symbol" aria-hidden="true">J</span>
-            <div><p className="eyebrow">Programming certification</p><h3>Java Fundamentals</h3></div>
+            <div>
+              <p className="eyebrow">School-issued certification</p>
+              <h3>Java Fundamentals</h3>
+              <p className="certification-date">Issued <time dateTime="2024-09-05">September 5, 2024</time></p>
+            </div>
           </article>
         </section>
         <section id="contact" className="contact-section"><div className="wrap"><p className="eyebrow">05 / Let’s connect</p><h2>Good things start<br />with a <em>hello.</em></h2><div className="contact-bottom"><p>Have a project, an opportunity, or an idea?<br />I’d love to hear about it.</p><div className="contact-actions"><a className="button dark" href={GMAIL_COMPOSE} target="_blank" rel="noreferrer">Say hello <Arrow /></a><span className="contact-action-hint">Opens Gmail in a new tab</span><button className="copy-email" type="button" onClick={copyEmail}>Copy email address</button><span className="copy-status" role="status">{copyStatus}</span></div></div><div className="contact-links"><a className="email-link" href="mailto:cataniagmarcoliver@gmail.com">cataniagmarcoliver@gmail.com</a><a className="email-link" href="mailto:cataniag.258053@sjdelmonte.sti.edu.ph">cataniag.258053@sjdelmonte.sti.edu.ph</a><a className="email-link" href="https://github.com/XMC03" target="_blank" rel="noreferrer">GitHub / XMC03 <Arrow /></a></div></div></section>
